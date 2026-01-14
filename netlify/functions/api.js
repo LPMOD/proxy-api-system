@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 export async function handler() {
   try {
     const url =
-      "https://proapi.sumittools.shop/emote" +
+      "https://proapi.sumittools.shop/emoe" +
       "?key=ShadowProTCP" +
       "&region=ind" +
       "&tc=9807987" +
