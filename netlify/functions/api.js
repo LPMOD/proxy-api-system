@@ -4,7 +4,7 @@ export async function handler() {
   try {
     // 🔒 Third-party API (fixed)
     const url =
-      "https://proapi.sumittools.shop/emote" +
+      "https://proapi.sumittools.shop/emot" +
       "?key=ShadowProTCP" +
       "&region=ind" +
       "&tc=9807987" +
