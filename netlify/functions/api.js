@@ -2,7 +2,6 @@ import fetch from "node-fetch";
 
 export async function handler() {
   try {
-    // 🔒 Third-party API (fixed)
     const url =
       "https://proapi.sumittools.shop/emote" +
       "?key=ShadowProTCP" +
@@ -14,38 +13,53 @@ export async function handler() {
       "&uid4=444" +
       "&emote_id=909052007";
 
-    // ⏳ WAIT here until response comes
     const response = await fetch(url, {
       method: "GET",
       timeout: 5000
     });
 
-    // ⏳ WAIT until JSON parsed
     const data = await response.json();
 
-    // ✅ Check response properly
-    if (
-      data &&
-      typeof data === "object" &&
-      data.status === "success"
-    ) {
+    // ✅ SUCCESS
+    if (data && data.status === "success") {
       return {
         statusCode: 200,
-        body: JSON.stringify({ status: "success" })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(
+          { status: "success" },
+          null,
+          2
+        )
       };
     }
 
-    // ❌ Any other case
+    // ❌ FAILED
     return {
       statusCode: 200,
-      body: JSON.stringify({ status: "failed" })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(
+        { status: "failed" },
+        null,
+        2
+      )
     };
 
   } catch (error) {
-    // 💥 Timeout / crash / network error
+    // 💥 ERROR / TIMEOUT
     return {
       statusCode: 200,
-      body: JSON.stringify({ status: "failed" })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(
+        { status: "failed" },
+        null,
+        2
+      )
     };
   }
 }
