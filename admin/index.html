@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>API Admin Panel</title>
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+      padding: 15px;
+    }
+    pre {
+      background: #000;
+      border: 1px solid #0f0;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>🔐 API Admin Panel</h2>
+<p>Last Requests (Live)</p>
+
+<div id="logs">Loading...</div>
+
+<script>
+async function loadLogs() {
+  const res = await fetch("/.netlify/functions/api?admin=1");
+  const data = await res.json();
+
+  document.getElementById("logs").innerHTML =
+    "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+}
+
+loadLogs();
+setInterval(loadLogs, 3000);
+</script>
+
+</body>
+</html>
